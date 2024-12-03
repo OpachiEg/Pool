@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: init_db
+      author: EgorOdintsov
+      changes:
+        - sqlFile:
+            path: db/v1/sql/init_db.sql

@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: add_timetable
+      author: EgorOdintsov
+      changes:
+        - sqlFile:
+            path: db/v1/sql/add_timetable.sql

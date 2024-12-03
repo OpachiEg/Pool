@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - include:
+      file: ./v1/init_db.yml
+      relativeToChangeLogFile: true
+  - include:
+      file: ./v1/add_timetable.yml
+      relativeToChangeLogFile: true
+
