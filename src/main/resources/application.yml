@@ -3,9 +3,9 @@ spring:
     enabled: true
     change-log: db/master.yml
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: root
-    password: root
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/${DB_NAME:postgres}
+    username: ${DB_USER:root}
+    password: ${DB_USER:root}
   jpa:
     open-in-view: false
     properties:
