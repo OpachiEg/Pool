@@ -9,4 +9,8 @@ public interface ClientRepository extends BaseRepository<Client> {
 
     boolean existsByEmail(String email);
 
+    boolean existsByEmailAndIdNot(String email,Long id);
+
+    boolean existsByPhoneAndIdNot(String phone,Long id);
+
 }

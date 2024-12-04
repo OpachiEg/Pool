@@ -16,4 +16,4 @@ INSERT INTO t_timetable (start_at,end_at,day_of_week) VALUES
      ('10:00','18:00','FRIDAY'),
      ('10:00','16:00','SATURDAY');
 
-INSERT INTO t_timetable (start_at,end_at,day_of_week,specified_day) VALUES ('10:00','18:00','WEDNESDAY','2024-12-04');
+INSERT INTO t_timetable (start_at,end_at,day_of_week,specified_day) VALUES ('10:00','14:00','WEDNESDAY','2024-12-04');
