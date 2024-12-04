@@ -1,9 +1,11 @@
 package com.pool.dto.client;
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class ClientUpdateRqDto {
 
     @NotNull

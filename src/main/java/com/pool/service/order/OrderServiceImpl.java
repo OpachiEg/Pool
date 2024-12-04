@@ -35,8 +35,7 @@ public class OrderServiceImpl implements OrderService {
     private final ClientService clientService;
     private final OrderMapper orderMapper;
 
-    @Value("${limits.max-orders-per-time}")
-    private int maxOrdersPerTime;
+    private final int MAX_ORDERS_PER_TIME = 10;
 
     @Override
     public OrderReserveRsDto reserve(OrderReserveRqDto dto) {
@@ -63,7 +62,6 @@ public class OrderServiceImpl implements OrderService {
 
         DayOfWeek dayOfWeek = dto.getStartAt().getDayOfWeek();
 
-
         Optional<Timetable> optionalTimetable = timetableService.getByDayOfWeek(dayOfWeek, dto.getStartAt().toLocalDate());
         if (optionalTimetable.isEmpty()) {
             throw new BadRequestException("Order on this day is not available");
@@ -78,7 +76,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         long ordersPerTime = orderRepository.countByStartAtGreaterThanEqualAndEndAtLessThanEqualAndState(dto.getStartAt(), dto.getEndAt(),OrderState.ACTIVE);
-        if (ordersPerTime >= maxOrdersPerTime) {
+        if (ordersPerTime >= MAX_ORDERS_PER_TIME) {
             throw new BadRequestException("There are no places available at this time");
         }
 
@@ -98,13 +96,13 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orders = orderRepository.findAllByDateAndState(date,OrderState.ACTIVE);
 
         List<OrderRsDto> result = new ArrayList<>();
-        for (int i = 0; i <= ChronoUnit.HOURS.between(timetable.getStartAt(), timetable.getEndAt()); i++) {
+        for (int i = 0; i < ChronoUnit.HOURS.between(timetable.getStartAt(), timetable.getEndAt()); i++) {
             LocalDateTime timetableStartAt = LocalDateTime.of(date, LocalTime.of(timetable.getStartAt().getHour() + i, 0, 0));
             LocalDateTime timetableEndAt = LocalDateTime.of(date, LocalTime.of(timetable.getStartAt().getHour() + i + 1, 0, 0));
 
             long count = orders.stream().filter(o -> isOrderInTimetableRange(timetableStartAt, timetableEndAt, o.getStartAt(), o.getEndAt())).count();
             if (available) {
-                count = maxOrdersPerTime - count;
+                count = MAX_ORDERS_PER_TIME - count;
             }
 
             result.add(new OrderRsDto(timetableStartAt, count));

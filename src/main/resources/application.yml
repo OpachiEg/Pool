@@ -13,5 +13,3 @@ spring:
         jdbc:
           time_zone: UTC
 
-limits:
-  max-orders-per-time: 10
