@@ -1,8 +1,11 @@
 package com.pool.repository;
 
+import com.pool.annotation.DbTest;
+import com.pool.config.DbTestContainerConfig;
 import com.pool.model.Client;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
@@ -11,9 +14,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest
-@ActiveProfiles("test")
-public class ClientRepositoryTests {
+@DbTest
+public class ClientRepositoryTests extends DbTestContainerConfig {
 
     @Autowired
     private ClientRepository clientRepository;
