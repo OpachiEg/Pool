@@ -54,7 +54,7 @@ public class ClientServiceImpl implements ClientService {
     public ClientRsDto updateClient(ClientUpdateRqDto dto) {
         Client dbClient = getById(dto.getId());
 
-        if(clientRepository.existsByPhoneAndIdNot(dto.getEmail(),dbClient.getId())) {
+        if(clientRepository.existsByEmailAndIdNot(dto.getEmail(),dbClient.getId())) {
             throw new BadRequestException("This email already using");
         }
 

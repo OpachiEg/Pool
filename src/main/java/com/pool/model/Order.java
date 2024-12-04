@@ -23,7 +23,7 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderState state;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Client client;
 
 }

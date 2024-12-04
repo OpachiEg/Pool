@@ -13,7 +13,7 @@ CREATE TABLE t_order (
     updated  TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
     start_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     end_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    client_id BIGINT,
+    client_id BIGINT NOT NULL,
     state TEXT NOT NULL,
     CONSTRAINT t_order_client_id_fk FOREIGN KEY (client_id) REFERENCES t_client(id)
 );
